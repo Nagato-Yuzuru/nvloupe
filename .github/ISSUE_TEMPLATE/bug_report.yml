@@ -1,0 +1,34 @@
+name: Bug report
+description: Something nvloupe does is wrong or crashes (not a missed or wrongly-flagged capability — those have their own templates).
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What did you run, and what did it do?
+      placeholder: |
+        $ nvloupe scan ~/.config/nvim
+        ... what came out, or what broke
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected instead
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: The smaller the better. A trimmed config or a single plugin is ideal.
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: nvloupe version (`nvloupe --version`), OS, and how you installed it.
+    validations:
+      required: true

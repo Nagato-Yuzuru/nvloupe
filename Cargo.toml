@@ -1,0 +1,13 @@
+[package]
+name = "nvloupe"
+version = "0.0.0"
+edition = "2024"
+rust-version = "1.95"
+description = "Capability microscope for the vim/nvim plugin supply chain."
+repository = "https://github.com/Nagato-Yuzuru/nvloupe"
+license-file = "LICENSE"
+keywords = ["neovim", "vim", "security", "supply-chain", "static-analysis"]
+categories = ["command-line-utilities", "development-tools"]
+
+[lints.rust]
+unsafe_code = "forbid"

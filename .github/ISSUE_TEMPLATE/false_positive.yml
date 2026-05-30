@@ -1,0 +1,48 @@
+name: False positive (nvloupe flagged something benign)
+description: nvloupe reported a capability or red flag on code that is actually fine.
+labels: [false-positive]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        False positives are the thing that kills this tool (design §8). A report
+        here is worth a lot. The more precise the example, the faster the rule
+        gets fixed.
+  - type: input
+    id: plugin
+    attributes:
+      label: Plugin
+      description: owner/repo, and the commit you scanned.
+      placeholder: nvim-telescope/telescope.nvim @ <sha>
+    validations:
+      required: true
+  - type: input
+    id: capability
+    attributes:
+      label: What got flagged
+      description: Which category or red flag fired (exec, eval, ffi, env-secrets, net, fs-write, obfuscation, …).
+    validations:
+      required: true
+  - type: textarea
+    id: code
+    attributes:
+      label: The code it fired on
+      description: Paste the snippet (with file path), or link to the exact lines.
+      render: lua
+    validations:
+      required: true
+  - type: textarea
+    id: why-benign
+    attributes:
+      label: Why this is benign
+      description: What makes this a normal, safe use rather than the dangerous one the rule is after?
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: nvloupe output
+      description: The report lines for this finding.
+      render: text
+    validations:
+      required: false

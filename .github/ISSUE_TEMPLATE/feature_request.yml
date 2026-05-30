@@ -1,0 +1,28 @@
+name: Feature request
+description: Suggest something nvloupe should do.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do
+      description: The problem first, not the solution. What audit or workflow is awkward today?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What you have in mind
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Does this fit the design?
+      description: >-
+        nvloupe is a microscope, not an oracle (it extracts capabilities and
+        detects change; it does not judge malicious vs benign). The non-goals
+        are in docs §2. If your idea brushes up against those, say how you see
+        it fitting.
+    validations:
+      required: false

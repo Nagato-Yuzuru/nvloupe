@@ -1,0 +1,54 @@
+name: Capability rule proposal
+description: Propose a new ast-grep rule for the curated ruleset.
+labels: [rule]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        The ruleset is the heart of nvloupe. A good proposal comes with both
+        halves: what should match, and what must not. The second half is where
+        rules earn their keep.
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - exec
+        - eval
+        - ffi
+        - env-secrets
+        - net
+        - fs-write
+        - red-flag (obfuscation, curl|sh build, …)
+    validations:
+      required: true
+  - type: textarea
+    id: pattern
+    attributes:
+      label: The pattern
+      description: The ast-grep rule, or a plain description of the shape if you haven't written the YAML yet.
+      render: yaml
+    validations:
+      required: true
+  - type: textarea
+    id: should-match
+    attributes:
+      label: Code it SHOULD match
+      render: lua
+    validations:
+      required: true
+  - type: textarea
+    id: should-not-match
+    attributes:
+      label: Code it must NOT match
+      description: The benign look-alikes. If you can't think of any, the rule may be too broad.
+      render: lua
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Trigger time and notes
+      description: Where this tends to live (plugin/, lua/, build target) and anything else worth knowing.
+    validations:
+      required: false

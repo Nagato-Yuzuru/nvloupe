@@ -1,0 +1,12 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security report (a vulnerability in nvloupe itself)
+    url: https://github.com/Nagato-Yuzuru/nvloupe/security/advisories/new
+    about: >-
+      Report a flaw in nvloupe privately. Do not open a public issue for it. See
+      SECURITY.md.
+  - name: A plugin you think is malicious
+    url: https://github.com/Nagato-Yuzuru/nvloupe/blob/main/SECURITY.md
+    about: >-
+      nvloupe is not an intake for reporting bad plugins. SECURITY.md explains
+      where those go instead.

@@ -1,0 +1,49 @@
+name: Missed capability (nvloupe didn't flag something it should)
+description: Dangerous-surface code that nvloupe failed to detect.
+labels: [false-negative]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Use this for a *detection gap* — a pattern nvloupe ought to catch and
+        doesn't (so the rule can be improved).
+
+
+        If instead you have found a plugin you believe is **actively
+        malicious**, this is the wrong place: do not post it publicly here. See
+        SECURITY.md for where that goes. nvloupe also has a known floor of
+        false negatives by design (no taint/alias resolution, §2.2) — a miss
+        that falls under a declared blind spot is expected, not a bug.
+  - type: textarea
+    id: code
+    attributes:
+      label: The code that should have been flagged
+      description: A snippet (real or minimal) showing the pattern.
+      render: lua
+    validations:
+      required: true
+  - type: input
+    id: capability
+    attributes:
+      label: What capability is this
+      description: exec, eval, ffi, env-secrets, net, fs-write, or a red flag.
+    validations:
+      required: true
+  - type: dropdown
+    id: trigger
+    attributes:
+      label: When does it run
+      options:
+        - install-time (handed control by a build field)
+        - load-time (plugin/, ftplugin/ — fires at startup)
+        - call-time (lua/, only when required)
+        - not sure
+    validations:
+      required: true
+  - type: textarea
+    id: why-missed
+    attributes:
+      label: Any idea why it slips through?
+      description: Optional. E.g. it's behind an alias, or there's simply no rule for this shape yet.
+    validations:
+      required: false

@@ -1,0 +1,70 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+# CodeRabbit reviews pull requests. It runs as a GitHub App (install it from
+# https://app.coderabbit.ai — no workflow needed); this file only tunes it.
+language: en-US
+early_access: false
+tone_instructions: >-
+  Be direct and terse. Skip praise and preamble. Prioritize correctness,
+  security, and supply-chain concerns. Flag silent error handling and any drift
+  from the design's non-goals (microscope, not oracle).
+
+reviews:
+  profile: assertive
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  auto_review:
+    enabled: true
+    auto_incremental_review: true
+    drafts: false
+  path_filters:
+    - "!target/**"
+    - "!Cargo.lock"
+    - "!LICENSE"
+  path_instructions:
+    - path: "src/**/*.rs"
+      instructions: >-
+        Errors must surface, not be swallowed. Reject catch-and-continue,
+        default values, or fallbacks on internal paths; handle errors only at
+        real boundaries. Tests must be able to fail — flag any that assert a
+        function exists, check a type, or test a constant. Modules should stay
+        aligned with the design's components (resolver, matcher, differ,
+        reporter); flag logic that crosses those boundaries.
+    - path: "rules/**"
+      instructions: >-
+        The ruleset's whole job is low false positives (design §8). For any new
+        or changed rule, require both an example it should match and a benign
+        look-alike it must not match. Flag rules broad enough to fire on
+        ordinary plugin code.
+    - path: "**/*.md"
+      instructions: >-
+        Docs are written for humans. Flag AI-tell patterns: inflated
+        significance, rule-of-three padding, promotional adjectives, em-dash
+        overuse, title-case headings, and vague attributions. Prefer plain,
+        specific prose.
+    - path: ".github/workflows/**"
+      instructions: >-
+        Keep least-privilege permissions and pinned action versions. Flag any
+        secret handling that could be done tokenlessly via OIDC.
+  tools:
+    clippy:
+      enabled: true
+    actionlint:
+      enabled: true
+    yamllint:
+      enabled: true
+    markdownlint:
+      enabled: true
+    gitleaks:
+      enabled: true
+    shellcheck:
+      enabled: true
+    semgrep:
+      enabled: true
+
+knowledge_base:
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - "CONTRIBUTING.md"
+      - "docs/**/*.md"
